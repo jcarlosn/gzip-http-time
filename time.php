@@ -19,10 +19,15 @@ if(count($argv) < 2) {
 }
 $host = $argv[1];
 
+date_default_timezone_set('UTC');
+
 $bytes = shell_exec("curl -sL0 --raw --compressed -k http://".$host);
 if(ord($bytes{1}) == 139 && ord($bytes{0}) == 31) {
 	$timebytes = substr($bytes, 4, 4);
-	$rdate = unpack("V", $timebytes)[1];
+
+	$rdate = unpack("V", $timebytes);
+    $rdate = $rdate[1];
+
 	if(!$rdate) {
 		echo "Error: the server has not specified the time of compression in the gzip headers\n";
 		exit;
