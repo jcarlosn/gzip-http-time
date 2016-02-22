@@ -26,7 +26,7 @@ if(ord($bytes{1}) == 139 && ord($bytes{0}) == 31) {
 	$timebytes = substr($bytes, 4, 4);
 
 	$rdate = unpack("V", $timebytes);
-    $rdate = $rdate[1];
+	$rdate = $rdate[1];
 
 	if(!$rdate) {
 		echo "Error: the server has not specified the time of compression in the gzip headers\n";
