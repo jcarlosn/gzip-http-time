@@ -17,5 +17,5 @@ curl_raw=$(curl -sL0 --raw -k --compressed $1 | dd bs=4 skip=1 count=1 status=no
 if  grep -qb V <<< "$curl_raw" > /dev/null;then
 	date -d @`echo $curl_raw | od -t d4 | awk '{print $2}'`
 else
-	echo "Error: Gzip headers, timestamp not foundd"
+	echo "Error: Gzip headers, timestamp not found"
 fi
